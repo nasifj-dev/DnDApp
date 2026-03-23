@@ -7,9 +7,9 @@ from Spell import Spell
 if __name__ == '__main__':
 
     # Extracts raw text from character sheet pdf for parsing.
-    # reader = PdfReader("statstuff/character sheets/testerman.pdf")
-    # reader = PdfReader("statstuff/character sheets/malum.pdf")
-    reader = PdfReader("statstuff/character sheets/cramer.pdf")
+    # reader = PdfReader("statstuff/Sheet Examples/testerman.pdf")
+    # reader = PdfReader("statstuff/Sheet Examples/malum.pdf")
+    reader = PdfReader("statstuff/Sheet Examples/cramer.pdf")
     pages = []
     for num, page in enumerate(reader.pages):
         extract = page.extract_text().split("\n")
