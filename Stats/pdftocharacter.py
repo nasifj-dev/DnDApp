@@ -1,23 +1,9 @@
 from pypdf import PdfReader
-from Character import Character
-from Item import Item
-from Spell import Spell
+from Stats.Character import Character
+from Stats.Item import Item
+from Stats.Spell import Spell
 
-
-if __name__ == '__main__':
-
-    # Extracts raw text from character sheet pdf for parsing.
-    # reader = PdfReader("statstuff/Sheet Examples/testerman.pdf")
-    # reader = PdfReader("statstuff/Sheet Examples/malum.pdf")
-    reader = PdfReader("statstuff/Sheet Examples/cramer.pdf")
-    pages = []
-    for num, page in enumerate(reader.pages):
-        extract = page.extract_text().split("\n")
-        pages.append(extract)
-
-    # Separates pages.
-    first, second, last = pages[0], pages[1], pages[-1]
-
+def pdftosheet(first, second, last):
     # Level/class
     if "/" in first[59]:
         splits = first[59].split("/")
@@ -169,10 +155,10 @@ if __name__ == '__main__':
             if spell == ['']:
                 break
             range_shape = spell[5].split('/')
-            range = spell[5]
+            ran = spell[5]
             shape = None
             if len(range_shape) > 1:
-                range = range_shape[0]
+                ran = range_shape[0]
                 shape = range_shape[1]
             new_spell = Spell(level, spell[1].strip(), spell[3], spell[4], range, shape, 
                               spell[6], spell[7], spell[8])
@@ -185,4 +171,4 @@ if __name__ == '__main__':
                    int(first[skills_break+4]), first[skills_break+6], action_list, gold, encumberance, inventory, 
                    spellcasting_ability, spells, spell_slots)
     
-    print("\n", ch, "\n")
+    return ch
