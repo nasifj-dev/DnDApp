@@ -1,6 +1,6 @@
 import math
-from Item import Item
-from Spell import Spell
+from Stats.Item import Item
+from Stats.Spell import Spell
 
 
 class Character():
@@ -110,7 +110,7 @@ class Character():
             return self.modifier(self._spellcasting_ability) + self._prof_bonus
         return None
     
-    def __str__(self):
+    def big_desc(self):
         return f"{self._name} is a level {self._level} {self._race} {self._dclass} " \
                f"played by {self._player_name}. They have a {self._background} background, " \
                f"their ability scores are {self._ability_scores}, and have proficiencies in " \
@@ -119,3 +119,6 @@ class Character():
                f"Gold: {self._gold}, Encumberance: {self._encumberance} lbs, Inventory: {self.inventory()}, " \
                f"Spellcasting ability: {self._spellcasting_ability}, Spells: {self.spells()}, Spell slots: {self._spell_slots}, " \
                f"Senses: {self._senses}, Saving throw notes: {self._saving_throw_notes}"
+    
+    def __str__(self):
+        return f"{self._name}, level {self._level} {self._race} {self._dclass}"
