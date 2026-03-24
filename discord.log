@@ -97,3 +97,54 @@
 [2026-03-24 10:35:32] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
 [2026-03-24 10:36:13] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 4.
 [2026-03-24 10:36:13] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2026-03-24 10:36:54] [DEBUG   ] discord.gateway: Received WSMessage(type=<WSMsgType.CLOSE: 8>, data=4003, extra='Not authenticated.')
+[2026-03-24 10:36:54] [DEBUG   ] discord.gateway: Websocket closed with 1006, attempting a reconnect.
+[2026-03-24 10:36:54] [DEBUG   ] discord.client: Got a request to RESUME the websocket.
+[2026-03-24 10:36:54] [DEBUG   ] discord.client: Dispatching event disconnect
+[2026-03-24 10:36:54] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-c.discord.gg
+[2026-03-24 10:36:54] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-c-td0p",{"micros":0.0}]']}}
+[2026-03-24 10:36:54] [DEBUG   ] discord.gateway: Shard ID None has sent the RESUME payload.
+[2026-03-24 10:36:54] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2026-03-24 10:36:54] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 9, 'd': False}
+[2026-03-24 10:36:54] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-03-24 10:36:55] [DEBUG   ] discord.client: Got a request to IDENTIFY the websocket.
+[2026-03-24 10:36:55] [DEBUG   ] discord.client: Dispatching event disconnect
+[2026-03-24 10:36:55] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-c.discord.gg
+[2026-03-24 10:36:55] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-c-853f",{"micros":0.0}]']}}
+[2026-03-24 10:37:00] [DEBUG   ] discord.gateway: Shard ID None has sent the IDENTIFY payload.
+[2026-03-24 10:37:00] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2026-03-24 10:37:00] [DEBUG   ] discord.gateway: Received WSMessage(type=<WSMsgType.CLOSE: 8>, data=4004, extra='Authentication failed.')
+[2026-03-24 10:37:00] [DEBUG   ] discord.gateway: Websocket closed with 1006, attempting a reconnect.
+[2026-03-24 10:37:00] [DEBUG   ] discord.client: Got a request to RESUME the websocket.
+[2026-03-24 10:37:00] [DEBUG   ] discord.client: Dispatching event disconnect
+[2026-03-24 10:37:01] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-c.discord.gg
+[2026-03-24 10:37:01] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-c-bl8t",{"micros":0.0}]']}}
+[2026-03-24 10:37:01] [DEBUG   ] discord.gateway: Shard ID None has sent the RESUME payload.
+[2026-03-24 10:37:01] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2026-03-24 10:37:01] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 9, 'd': False}
+[2026-03-24 10:37:01] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-03-24 10:37:01] [DEBUG   ] discord.client: Got a request to IDENTIFY the websocket.
+[2026-03-24 10:37:01] [DEBUG   ] discord.client: Dispatching event disconnect
+[2026-03-24 10:37:01] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-c.discord.gg
+[2026-03-24 10:37:01] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-c-gvgj",{"micros":0.0}]']}}
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: Shard ID None has sent the IDENTIFY payload.
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: Received WSMessage(type=<WSMsgType.CLOSE: 8>, data=4004, extra='Authentication failed.')
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: Websocket closed with 1006, attempting a reconnect.
+[2026-03-24 10:37:06] [DEBUG   ] discord.client: Got a request to RESUME the websocket.
+[2026-03-24 10:37:06] [DEBUG   ] discord.client: Dispatching event disconnect
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-c.discord.gg
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-c-gxpl",{"micros":0.0}]']}}
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: Shard ID None has sent the RESUME payload.
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2026-03-24 10:37:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 9, 'd': False}
+[2026-03-24 10:37:06] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-03-24 10:37:07] [DEBUG   ] discord.client: Got a request to IDENTIFY the websocket.
+[2026-03-24 10:37:07] [DEBUG   ] discord.client: Dispatching event disconnect
+[2026-03-24 10:37:07] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-c.discord.gg
+[2026-03-24 10:37:07] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-c-ffhd",{"micros":0.0}]']}}
+[2026-03-24 10:37:12] [DEBUG   ] discord.gateway: Shard ID None has sent the IDENTIFY payload.
+[2026-03-24 10:37:12] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2026-03-24 10:37:12] [DEBUG   ] discord.gateway: Received WSMessage(type=<WSMsgType.CLOSE: 8>, data=4004, extra='Authentication failed.')
+[2026-03-24 10:37:12] [DEBUG   ] discord.gateway: Websocket closed with 4004, cannot reconnect.
+[2026-03-24 10:37:12] [DEBUG   ] discord.client: Dispatching event disconnect
