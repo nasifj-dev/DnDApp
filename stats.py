@@ -56,25 +56,12 @@ class Stats(commands.Cog):
         else:
             score = " "
         embed = discord.Embed(
-            title=f"{ability.upper()} CHECK",
+            title=f"{ability} Check",
             description=f"{player.mention} must make a{score}{ability} check"
         )
         await interaction.response.send_message(embed=embed)
         poll_message = await interaction.original_response()
         await poll_message.add_reaction("🎲")
-
-        def check(reaction, user):
-            return str(reaction.emoji) == '🎲'
-
-        reaction, user = await self.bot.wait_for("reaction_add", check=check)
-        command = self.bot.tree.get_command('roll')
-
-        # ctx = await bot.get_context(interaction)
-        # try:
-        #     await bot.invoke(command)
-        #     print('hi')
-        # except Exception as e:
-        #     print(e)
 
     @app_commands.command(name="skillmod", description="Get a stat from your character sheet")
     async def skillMod(self, interaction: discord.Interaction, 

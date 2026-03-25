@@ -3,6 +3,8 @@ from discord.ext import commands
 import logging
 from dotenv import load_dotenv
 import os
+import random
+import pickle
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -31,6 +33,28 @@ async def on_ready():
         print(f"Synced {len(synced)} command(s)")
     except Exception as e:
         print(e)
+
+@bot.event
+async def on_reaction_add(reaction, user):
+
+    # Ability check rolling
+    if "Check" in reaction.message.embeds[0].title and str(user.id) in reaction.message.embeds[0].description:
+        if str(reaction.emoji) == '🎲':
+            ability = reaction.message.embeds[0].title.split(" ")[0]
+            await reaction.message.channel.send(f"Rolling {ability} Check...")
+            
+            with open("charactersPickle", "rb") as fin:
+                try:
+                    char_list = pickle.load(fin)
+                except EOFError:
+                    char_list = {}
+            your_ch = char_list[user.name]
+            
+            result = (random.randint(1, 20))
+            bonus = your_ch.skill(ability)
+            
+            await reaction.message.channel.send(f"You got a {result+bonus} ({result}+{bonus})")
+
 
 # Role Commands
 @bot.tree.command(name="setdm", description="Give yourself the DM role")
