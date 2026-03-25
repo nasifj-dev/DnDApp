@@ -82,6 +82,9 @@ class Character():
             return self.modifier(ability) + (self._prof_bonus*2)
         return self.modifier(ability)
     
+    def battle_stats(self):
+        return f"HP: {self._current_hp}/{self._max_hp}, AC: {self._ac}, Speed: {self._speed} ft."
+    
     def passive_perception(self):
         return 10 + self.skill("Perception")
     
