@@ -3,9 +3,6 @@ from discord.ext import commands
 import logging
 from dotenv import load_dotenv
 import os
-from Stats.pdftocharacter import pdftosheet
-from pypdf import PdfReader
-import pickle
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -27,8 +24,9 @@ role_Player = "Player"
 async def on_ready():
     print(f"We are ready to go in, {bot.user.name}")
     try:
-        await bot.load_extension("music")
+        # await bot.load_extension("music")
         await bot.load_extension("initiative")
+        await bot.load_extension("stats")
         synced = await bot.tree.sync()
         print(f"Synced {len(synced)} command(s)")
     except Exception as e:
@@ -70,35 +68,10 @@ async def releasePlayer(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now removed from {role_Player}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
-
-@bot.tree.command(name="uploadsheet", description="Upload a character sheets")
-async def uploadSheet(interaction: discord.Interaction, sheet: discord.Attachment):
-    try:
-        await sheet.save(f"Sheets/{sheet.filename}")
-        reader = PdfReader(f"Sheets/{sheet.filename}")
-        pages = []
-        for num, page in enumerate(reader.pages):
-            extract = page.extract_text().split("\n")
-            pages.append(extract)
-        first, second, last = pages[0], pages[1], pages[-1]
-        char = pdftosheet(first, second, last)
-
-        with open("charactersPickle", "rb") as fin:
-            try:
-                char_list = pickle.load(fin)
-            except EOFError:
-                char_list = {}
-        char_list[interaction.user.name] = char
-        with open("charactersPickle", "wb") as dbfile:
-            pickle.dump(char_list, dbfile)
-
-        await interaction.response.send_message(f'You have uploaded {char}')
-    except Exception as e:
-        await interaction.response.send_message(f'{e}')
-
-@bot.tree.command(name="abilitycheck", description="Set an ability check")
-async def abilityCheck(interaction: discord.Interaction):
-    pass
+    
+@bot.tree.command(name="roll", description="Roll some dice!")
+async def roll(interaction: discord.Interaction):
+    await interaction.response.send_message("roll test")
 
 # Run Bot
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
