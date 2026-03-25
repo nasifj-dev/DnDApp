@@ -6,6 +6,8 @@ import os
 from Stats.pdftocharacter import pdftosheet
 from pypdf import PdfReader
 import pickle
+import random
+
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -99,6 +101,15 @@ async def uploadSheet(interaction: discord.Interaction, sheet: discord.Attachmen
 @bot.tree.command(name="abilitycheck", description="Set an ability check")
 async def abilityCheck(interaction: discord.Interaction):
     pass
+
+@bot.tree.command(name="rolldie",description="Rolls dice in a NdN format")
+async def roll(interaction: discord.Interaction, n: int, dn: int):
+    """Rolls a dice in NdN format"""
+
+    # Parsing the result into a N, N, N format
+    result = ', '.join(str(random.randint(1, dn)) for r in range(n))
+    await interaction.response.send_message(result)
+
 
 # Run Bot
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
