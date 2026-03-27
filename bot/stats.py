@@ -7,6 +7,8 @@ import pickle
 from typing import Literal
 
 class Stats(commands.Cog):
+    """A collection of commands for handling character statistics."""
+
     def __init__(self, bot):
         self.bot = bot
 
