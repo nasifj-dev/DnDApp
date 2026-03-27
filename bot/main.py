@@ -99,7 +99,7 @@ async def releasePlayer(interaction: discord.Interaction):
 @bot.tree.command(name="rolldie",description="Rolls dice in a NdN format")
 async def roll(interaction: discord.Interaction, n: int, dn: int):
     """Rolls a dice in NdN format"""
-
+    
     # Parsing the result into a N, N, N format
     result = ', '.join(str(random.randint(1, dn)) for r in range(n))
     await interaction.response.send_message(result)
