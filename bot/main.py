@@ -3,8 +3,11 @@ from discord.ext import commands
 import logging
 from dotenv import load_dotenv
 import os
-import random
+from Stats.Character import Character
+from Stats.pdftocharacter import pdftosheet
+from pypdf import PdfReader
 import pickle
+import random
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -92,6 +95,14 @@ async def releasePlayer(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now removed from {role_Player}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
+    
+@bot.tree.command(name="rolldie",description="Rolls dice in a NdN format")
+async def roll(interaction: discord.Interaction, n: int, dn: int):
+    """Rolls a dice in NdN format"""
+
+    # Parsing the result into a N, N, N format
+    result = ', '.join(str(random.randint(1, dn)) for r in range(n))
+    await interaction.response.send_message(result)
 
 # Run Bot
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
