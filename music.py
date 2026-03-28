@@ -22,6 +22,9 @@ class Music(commands.Cog):
 
     @app_commands.command(name="join", description="Join your voice channel")
     async def join(self, interaction: discord.Interaction):
+        if interaction.guild is None:
+            await interaction.response.send_message("This command can only be used in a server.", ephemeral=True)
+            return
         if interaction.user.voice is None:
             await interaction.response.send_message(
                 "You are not in a voice channel!",
@@ -40,10 +43,13 @@ class Music(commands.Cog):
 
     @app_commands.command(name="leave", description="Leave the voice channel")
     async def leave(self, interaction: discord.Interaction):
+        if interaction.guild is None:
+            await interaction.response.send_message("This command can only be used in a server.", ephemeral=True)
+            return
         vc = interaction.guild.voice_client
         if vc:
             await vc.disconnect()
-            await interaction.response.send_message("Disconnected from voice channel.")
+            await interaction.response.send_message("Disconnected from voice channel.", ephemeral=True)
         else:
             await interaction.response.send_message(
                 "I am not in a voice channel.",
@@ -53,6 +59,9 @@ class Music(commands.Cog):
     @app_commands.command(name="play", description="Play audio from a YouTube URL")
     @app_commands.describe(url="The YouTube URL")
     async def play(self, interaction: discord.Interaction, url: str):
+        if interaction.guild is None:
+            await interaction.response.send_message("This command can only be used in a server.", ephemeral=True)
+            return
         if interaction.user.voice is None:
             await interaction.response.send_message(
                 "You need to be in a voice channel first.",
@@ -99,6 +108,9 @@ class Music(commands.Cog):
 
     @app_commands.command(name="stop", description="Stop playback")
     async def stop(self, interaction: discord.Interaction):
+        if interaction.guild is None:
+            await interaction.response.send_message("This command can only be used in a server.", ephemeral=True)
+            return
         vc = interaction.guild.voice_client
         if vc and vc.is_playing():
             vc.stop()
@@ -108,6 +120,9 @@ class Music(commands.Cog):
 
     @app_commands.command(name="pause", description="Pause playback")
     async def pause(self, interaction: discord.Interaction):
+        if interaction.guild is None:
+            await interaction.response.send_message("This command can only be used in a server.", ephemeral=True)
+            return
         vc = interaction.guild.voice_client
         if vc and vc.is_playing():
             vc.pause()
@@ -117,6 +132,9 @@ class Music(commands.Cog):
 
     @app_commands.command(name="resume", description="Resume playback")
     async def resume(self, interaction: discord.Interaction):
+        if interaction.guild is None:
+            await interaction.response.send_message("This command can only be used in a server.", ephemeral=True)
+            return
         vc = interaction.guild.voice_client
         if vc and vc.is_paused():
             vc.resume()
