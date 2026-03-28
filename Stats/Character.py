@@ -42,17 +42,20 @@ class Character():
             raise TypeError("Hitpoints must be an integer.")
         self._current_hp = max(self._current_hp - hitpoints, 0)
         return f"{self._name} took {hitpoints} damage and is now at {self._current_hp} hp."
+    """Apply damage to the character and return a message with the new HP total."""
     
     def heal(self, hitpoints: int):
         if type(hitpoints) is not int:
             raise TypeError("Hitpoints must be an integer.")
         self._current_hp = min(self._current_hp + hitpoints, self._max_hp)
         return f"{self._name} healed {hitpoints} damage and is now at {self._current_hp} hp."
+    """Heal the character and return a message with the new HP total."""
 
     def modifier(self, ability: str):
         if ability not in ["STR", "DEX", "CON", "INT", "WIS", "CHA"]:
             raise ValueError("Abiltity must be STR, DEX, CON, INT, WIS, or CHA.")
         return math.floor((self._ability_scores[ability]-10)/2)
+    """Calculate the ability modifier for a given ability score."""
     
     def skill(self, skill: str):
         if skill not in ['Acrobatics', 'Animal Handling', 'Arcana', 'Athletics', 
@@ -81,37 +84,47 @@ class Character():
         elif skill in self._expertises:
             return self.modifier(ability) + (self._prof_bonus*2)
         return self.modifier(ability)
+    """Calculate the skill modifier for a given skill, taking into account proficiency, half proficiency, and expertise."""
     
     def battle_stats(self):
         return f"HP: {self._current_hp}/{self._max_hp}, AC: {self._ac}, Speed: {self._speed} ft."
+    """Return a string with the character's current HP, AC, and speed for easy reference during battle."""
     
     def passive_perception(self):
         return 10 + self.skill("Perception")
+    """Calculate the passive perception score for the character."""
     
     def passive_insight(self):
         return 10 + self.skill("Insight")
+    """Calculate the passive insight score for the character."""
     
     def passive_investigation(self):
         return 10 + self.skill("Investigation")
+    """Calculate the passive investigation score for the character."""
     
     def initiative(self):
         return self.modifier("DEX")
+    """Calculate the initiative modifier for the character."""
     
     def inventory(self):
         return [str(i) for i in self._inventory]
+    """Return a list of the items in the character's inventory."""
     
     def spells(self):
         return [str(i) for i in self._spells]
+    """Return a list of the character's spells."""
     
     def spell_save_dc(self):
         if self._spellcasting_ability:
             return self.spell_attack_bonus() + 8
         return None
+    """Calculate the spell save DC for the character's spells."""
     
     def spell_attack_bonus(self):
         if self._spellcasting_ability:
             return self.modifier(self._spellcasting_ability) + self._prof_bonus
         return None
+    """Calculate the spell attack bonus for the character's spells."""
     
     def big_desc(self):
         return f"{self._name} is a level {self._level} {self._race} {self._dclass} " \
@@ -122,6 +135,8 @@ class Character():
                f"Gold: {self._gold}, Encumberance: {self._encumberance} lbs, Inventory: {self.inventory()}, " \
                f"Spellcasting ability: {self._spellcasting_ability}, Spells: {self.spells()}, Spell slots: {self._spell_slots}, " \
                f"Senses: {self._senses}, Saving throw notes: {self._saving_throw_notes}"
+    """Return a detailed description of the character with all their stats and information."""
     
     def __str__(self):
         return f"{self._name}, level {self._level} {self._race} {self._dclass}"
+    """Return a short string representation of the character with their name, level, race, and class."""

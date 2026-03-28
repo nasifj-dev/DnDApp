@@ -40,6 +40,7 @@ class Music(commands.Cog):
             await channel.connect()
 
         await interaction.response.send_message(f"Joined {channel.name}")
+    """Have the bot join the voice channel of the sender."""
 
     @app_commands.command(name="leave", description="Leave the voice channel")
     async def leave(self, interaction: discord.Interaction):
@@ -55,6 +56,7 @@ class Music(commands.Cog):
                 "I am not in a voice channel.",
                 ephemeral=True
             )
+    """Have the bot leave the voice channel."""
 
     @app_commands.command(name="play", description="Play audio from a YouTube URL")
     @app_commands.describe(url="The YouTube URL")
@@ -105,6 +107,7 @@ class Music(commands.Cog):
         except Exception as e:
             await interaction.followup.send(f"Error playing audio: {e}")
             print(f"Play error: {e}")
+    """Play audio from a YouTube URL in the sender's voice channel."""
 
     @app_commands.command(name="stop", description="Stop playback")
     async def stop(self, interaction: discord.Interaction):
@@ -117,6 +120,7 @@ class Music(commands.Cog):
             await interaction.response.send_message("Stopped playback.")
         else:
             await interaction.response.send_message("Nothing is playing.", ephemeral=True)
+    """Stop the currently playing audio."""
 
     @app_commands.command(name="pause", description="Pause playback")
     async def pause(self, interaction: discord.Interaction):
@@ -129,6 +133,7 @@ class Music(commands.Cog):
             await interaction.response.send_message("Paused playback.")
         else:
             await interaction.response.send_message("Nothing is playing.", ephemeral=True)
+    """Pause the currently playing audio."""
 
     @app_commands.command(name="resume", description="Resume playback")
     async def resume(self, interaction: discord.Interaction):
@@ -141,6 +146,7 @@ class Music(commands.Cog):
             await interaction.response.send_message("Resumed playback.")
         else:
             await interaction.response.send_message("Nothing is paused.", ephemeral=True)
+    """Resume the currently paused audio."""
 
 
 async def setup(bot):

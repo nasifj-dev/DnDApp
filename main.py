@@ -3,7 +3,7 @@ from discord.ext import commands
 import logging
 from dotenv import load_dotenv
 import os
-from Stats.Character import Character
+# from Stats.Character import Character
 from Stats.pdftocharacter import pdftosheet
 from pypdf import PdfReader
 import pickle
@@ -29,13 +29,15 @@ role_Player = "Player"
 async def on_ready():
     print(f"We are ready to go in, {bot.user.name}")
     try:
-        # await bot.load_extension("music")
+        await bot.load_extension("music")
         await bot.load_extension("initiative")
         await bot.load_extension("stats")
         synced = await bot.tree.sync()
         print(f"Synced {len(synced)} command(s)")
     except Exception as e:
         print(e)
+"""Importing the different sections of the bot from different files"""
+
 
 @bot.event
 async def on_reaction_add(reaction, user):
@@ -57,6 +59,8 @@ async def on_reaction_add(reaction, user):
             bonus = your_ch.skill(ability)
             
             await reaction.message.channel.send(f"You got a {result+bonus} ({result}+{bonus})")
+"""When a person hits the button or reacts to a message, roll said dice."""
+
 
 
 # Role Commands
@@ -68,6 +72,7 @@ async def setDM(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now assigned to {role_DM}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
+"""Give the sender the DM role"""
 
 @bot.tree.command(name="setplayer", description="Give yourself the Player role")
 async def setPlayer(interaction: discord.Interaction):
@@ -77,6 +82,7 @@ async def setPlayer(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now assigned to {role_Player}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
+"""Give the sender the Player role"""
 
 @bot.tree.command(name="releasedm", description="Release yourself of the DM role")
 async def releaseDM(interaction: discord.Interaction):
@@ -86,6 +92,7 @@ async def releaseDM(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now removed from {role_DM}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
+"""Remove the sender's the DM role"""
 
 @bot.tree.command(name="releaseplayer", description="Release yourself of the Player role")
 async def releasePlayer(interaction: discord.Interaction):
@@ -95,6 +102,7 @@ async def releasePlayer(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now removed from {role_Player}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
+"""Remove the sender's the Player role"""
 
 @bot.tree.command(name="uploadsheet", description="Upload a character sheets")
 async def uploadSheet(interaction: discord.Interaction, sheet: discord.Attachment):
@@ -120,12 +128,14 @@ async def uploadSheet(interaction: discord.Interaction, sheet: discord.Attachmen
         await interaction.response.send_message(f'You have uploaded {char}')
     except Exception as e:
         await interaction.response.send_message(f'{e}')
+"""Upload a character sheet to the bot for parsing"""
 
 @bot.tree.command(name="abilitycheck", description="Set an ability check")
 async def abilityCheck(interaction: discord.Interaction):
     # Figure out a way to select a performance check from a list, then apply modifiers based on the current user's character.
 
     pass
+"""Run an ability check and use the modifiers from the player's character"""
 
 @bot.tree.command(name="rolldie",description="Rolls dice in a NdN format")
 async def roll(interaction: discord.Interaction, n: int, dn: int):
@@ -134,6 +144,7 @@ async def roll(interaction: discord.Interaction, n: int, dn: int):
     # Parsing the result into a N, N, N format
     result = ', '.join(str(random.randint(1, dn)) for r in range(n))
     await interaction.response.send_message(result)
+"""Roll a dice, different amount of dice and different type of dice"""
 
 # Run Bot
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)

@@ -13,3 +13,4 @@ class Spell():
 
     def __str__(self):
         return f"{self._name} ({self._level})"
+    """Return a string representation of the spell with its name and level."""

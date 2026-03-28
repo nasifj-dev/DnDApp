@@ -6,3 +6,4 @@ class Item():
 
     def __str__(self):
         return f"{self._name} ({self._count})"
+    """Return a string representation of the item with its name and count."""
