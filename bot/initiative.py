@@ -41,6 +41,7 @@ class Initiative(commands.Cog):
         }
 
         await interaction.response.send_message("Initiative set.", ephemeral=True)
+    """Set the initiative order for the server. Only the DM can use this command."""
 
     @app_commands.command(name="updateinitiative", description="Update initiative")
     @app_commands.describe(
@@ -107,6 +108,7 @@ class Initiative(commands.Cog):
             state["current_index"] = min(state["current_index"], len(state["order"]) - 1)
 
         await interaction.response.send_message("Initiative updated.", ephemeral=True)
+    """Update the initiative of a character in the tracker. Only the DM can use this command. Setting initiative to 0 removes the character from the tracker."""
 
     @app_commands.command(name="rollinitiative", description="Roll initiative and optionally add it to the tracker")
     @app_commands.describe(
@@ -139,6 +141,7 @@ class Initiative(commands.Cog):
             f" for a total of `{total}`{add_text}.",
             ephemeral=True
         )
+    """Roll initiative for a character and optionally add or update them in the initiative tracker."""
 
     @app_commands.command(name="initiative", description="Display initiative")
     async def Initiative(self, interaction: discord.Interaction):
@@ -156,6 +159,7 @@ class Initiative(commands.Cog):
         self.initiative_state[guild_id]["message_id"] = poll_message.id
         await poll_message.add_reaction(CROSS_MARK)
         await poll_message.add_reaction(NEXT_ARROW)
+    """Display the current initiative order. Only the DM can use this command."""
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
@@ -200,6 +204,7 @@ class Initiative(commands.Cog):
         state["message_id"] = new_message.id
         await new_message.add_reaction(CROSS_MARK)
         await new_message.add_reaction(NEXT_ARROW)
+    """Handle reactions to the initiative message. The DM can click the next arrow to advance initiative or the cross mark to end the initiative tracking."""
 
     def _parse_initiative_entries(self, characters: str):
         entries = []
@@ -228,6 +233,7 @@ class Initiative(commands.Cog):
 
         entries.sort(key=lambda entry: entry["initiative"], reverse=True)
         return entries
+    """Parse the character and initiative entries from the command input. The expected format is `Name:Initiative`, separated by commas. Example: `Alice:18, Goblin 1:14`."""
 
     def _upsert_initiative_entry(self, guild_id: int, name: str, initiative: int):
         state = self.initiative_state.setdefault(
@@ -265,6 +271,7 @@ class Initiative(commands.Cog):
                 return
 
         state["current_index"] = 0
+    """Add or update a character's initiative in the tracker, and maintain the current turn index correctly."""
 
     def _format_modifier(self, modifier: int):
         if modifier == 0:
@@ -272,6 +279,7 @@ class Initiative(commands.Cog):
         if modifier > 0:
             return f" + `{modifier}`"
         return f" - `{abs(modifier)}`"
+    """Format the initiative modifier for display in the roll initiative command."""
 
     def _build_initiative_embed(self, guild_id: int):
         state = self.initiative_state[guild_id]
@@ -288,6 +296,7 @@ class Initiative(commands.Cog):
             description="\n".join(description_lines)
         )
         return embed
+    """Helper methods for managing the initiative tracker state and formatting the initiative embed."""
 
 
 async def setup(bot):

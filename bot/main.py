@@ -33,6 +33,8 @@ async def on_ready():
         print(f"Synced {len(synced)} command(s)")
     except Exception as e:
         print(e)
+"""Importing the different sections of the bot from different files"""
+
 
 @bot.event
 async def on_reaction_add(reaction, user):
@@ -54,6 +56,8 @@ async def on_reaction_add(reaction, user):
             bonus = your_ch.skill(ability)
             
             await reaction.message.channel.send(f"You got a {result+bonus} ({result}+{bonus})")
+"""When a person hits the button or reacts to a message, roll said dice."""
+
 
 
 # Role Commands
@@ -65,6 +69,7 @@ async def setDM(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now assigned to {role_DM}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
+"""Give the sender the DM role"""
 
 @bot.tree.command(name="setplayer", description="Give yourself the Player role")
 async def setPlayer(interaction: discord.Interaction):
@@ -74,6 +79,7 @@ async def setPlayer(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now assigned to {role_Player}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
+"""Give the sender the Player role"""
 
 @bot.tree.command(name="releasedm", description="Release yourself of the DM role")
 async def releaseDM(interaction: discord.Interaction):
@@ -83,6 +89,7 @@ async def releaseDM(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now removed from {role_DM}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
+"""Remove the sender's the DM role"""
 
 @bot.tree.command(name="releaseplayer", description="Release yourself of the Player role")
 async def releasePlayer(interaction: discord.Interaction):
@@ -92,7 +99,8 @@ async def releasePlayer(interaction: discord.Interaction):
         await interaction.response.send_message(f"{interaction.user.mention} is now removed from {role_Player}", ephemeral = True)
     else:
         await interaction.response.send_message("Role does not exist")
-    
+"""Remove the sender's the Player role"""
+
 @bot.tree.command(name="rolldie",description="Rolls dice in a NdN format")
 async def roll(interaction: discord.Interaction, n: int, dn: int):
     """Rolls a dice in NdN format"""
@@ -100,6 +108,7 @@ async def roll(interaction: discord.Interaction, n: int, dn: int):
     # Parsing the result into a N, N, N format
     result = ', '.join(str(random.randint(1, dn)) for r in range(n))
     await interaction.response.send_message(result)
+"""Roll a dice, different amount of dice and different type of dice"""
 
 # Run Bot
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
