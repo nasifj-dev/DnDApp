@@ -1,6 +1,9 @@
 class Spell():
+    """A class to represent D&D spells."""
+
     def __init__(self, level: int, name: str, save_atk: str, action: str, 
                  range:int, shape: str, comp: list[str], duration: str, ref: str):
+        """Builds the spell out of the inputted fields."""
         self._level = level
         self._name = name
         self._save_atk = save_atk

@@ -1,0 +1,25 @@
+@startuml packages
+set namespaceSeparator none
+package "Stats.Character" as Stats.Character {
+}
+package "Stats.Item" as Stats.Item {
+}
+package "Stats.Spell" as Stats.Spell {
+}
+package "Stats.pdftocharacter" as Stats.pdftocharacter {
+}
+package "Stats.stats" as Stats.stats {
+}
+package "initiative" as initiative {
+}
+package "main" as main {
+}
+package "music" as music {
+}
+Stats.Character --> Stats.Item
+Stats.Character --> Stats.Spell
+Stats.pdftocharacter --> Stats.Character
+Stats.pdftocharacter --> Stats.Item
+Stats.pdftocharacter --> Stats.Spell
+Stats.stats --> Stats.pdftocharacter
+@enduml

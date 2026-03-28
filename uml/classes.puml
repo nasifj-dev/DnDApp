@@ -1,0 +1,49 @@
+@startuml classes
+set namespaceSeparator none
+class "Character" as Stats.Character.Character {
+  battle_stats()
+  big_desc()
+  damage(hitpoints: int)
+  heal(hitpoints: int)
+  initiative()
+  inventory()
+  modifier(ability: str)
+  passive_insight()
+  passive_investigation()
+  passive_perception()
+  skill(skill: str)
+  spell_attack_bonus()
+  spell_save_dc()
+  spells()
+}
+class "Initiative" as initiative.Initiative {
+  bot
+  Initiative(interaction: discord.Interaction)
+  setInitiative(interaction: discord.Interaction)
+  updateInitiative(interaction: discord.Interaction)
+}
+class "Item" as Stats.Item.Item {
+}
+class "Music" as music.Music {
+  bot
+  join(interaction: discord.Interaction)
+  leave(interaction: discord.Interaction)
+  pause(interaction: discord.Interaction)
+  play(interaction: discord.Interaction, url: str)
+  resume(interaction: discord.Interaction)
+  stop(interaction: discord.Interaction)
+}
+class "Spell" as Stats.Spell.Spell {
+}
+class "Stats" as Stats.stats.Stats {
+  bot
+  abilityCheck(interaction: discord.Interaction, player: discord.User, ability: Literal['Acrobatics', 'Animal Handling', 'Arcana', 'Athletics', 'Deception', 'History', 'Insight', 'Intimidation', 'Investigation', 'Medicine', 'Nature', 'Perception', 'Performance', 'Persuasion', 'Religion', 'Sleight of Hand', 'Stealth', 'Survival', 'STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'], dc: int)
+  battleStats(interaction: discord.Interaction)
+  damage(interaction: discord.Interaction, hitpoints: int)
+  heal(interaction: discord.Interaction, hitpoints: int)
+  inventory(interaction: discord.Interaction)
+  skillMod(interaction: discord.Interaction, ability: Literal['Acrobatics', 'Animal Handling', 'Arcana', 'Athletics', 'Deception', 'History', 'Insight', 'Intimidation', 'Investigation', 'Medicine', 'Nature', 'Perception', 'Performance', 'Persuasion', 'Religion', 'Sleight of Hand', 'Stealth', 'Survival'])
+  spells(interaction: discord.Interaction)
+  uploadSheet(interaction: discord.Interaction, sheet: discord.Attachment)
+}
+@enduml
