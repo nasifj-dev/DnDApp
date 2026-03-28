@@ -3,6 +3,7 @@ from Item import Item
 from Spell import Spell
 
 def pdftosheet(first, second, last):
+    """Parse the text extracted from a character sheet PDF into a Character object. The function takes three lists of strings representing the text from the first, second, and last pages of the PDF, and extracts relevant information to create and return a Character object with all the character's stats and information."""
     # Level/class
     if "/" in first[59]:
         splits = first[59].split("/")
@@ -171,4 +172,3 @@ def pdftosheet(first, second, last):
                    spellcasting_ability, spells, spell_slots)
     
     return ch
-"""Parse the text extracted from a character sheet PDF into a Character object. The function takes three lists of strings representing the text from the first, second, and last pages of the PDF, and extracts relevant information to create and return a Character object with all the character's stats and information."""
