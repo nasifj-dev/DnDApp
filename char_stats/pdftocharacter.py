@@ -1,7 +1,6 @@
-from pypdf import PdfReader
-from Stats.Character import Character
-from Stats.Item import Item
-from Stats.Spell import Spell
+from Character import Character
+from Item import Item
+from Spell import Spell
 
 def pdftosheet(first, second, last):
     # Level/class

@@ -1,6 +1,6 @@
 import math
-from Stats.Item import Item
-from Stats.Spell import Spell
+from Item import Item
+from Spell import Spell
 
 
 class Character():

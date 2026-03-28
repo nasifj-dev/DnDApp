@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
-from Stats.pdftocharacter import pdftosheet
+from char_stats.pdftocharacter import pdftosheet
 from pypdf import PdfReader
 import pickle
 from typing import Literal
