@@ -1,0 +1,1 @@
+This is a term project for our Software Engineering class. We are to build a discord bot to aid in the polaying of Dungeons and Dragons online. The bot runs as is so long as you download ffmpeg. These files are necessary to run the music section of the bot. They were too large to add to this repository. Though the files can be obtained from here: [https://www.ffmpeg.org](url).
