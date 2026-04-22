@@ -1,7 +1,9 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
+import pickle
 import random
+from Character import Character
 
 role_DM = "DM"
 CROSS_MARK = "\N{CROSS MARK}"
@@ -113,20 +115,23 @@ class Initiative(commands.Cog):
     @app_commands.command(name="rollinitiative", description="Roll initiative and optionally add it to the tracker")
     @app_commands.describe(
         name="Character name to roll for",
-        modifier="Initiative modifier to add to the d20 roll",
+        modifier="Initiative modifier to add to the d20 roll (optional; uses your saved character if available)",
         add_to_list="If true, add or update this character in the initiative tracker"
     )
     async def rollInitiative(
         self,
         interaction: discord.Interaction,
         name: str,
-        modifier: int = 0,
+        modifier: int | None = None,
         add_to_list: bool = True
     ):
         """Roll initiative for a character and optionally add or update them in the initiative tracker."""
         if interaction.guild is None:
             await interaction.response.send_message("This command can only be used in a server.", ephemeral=True)
             return
+
+        if modifier is None:
+            modifier = self._get_saved_initiative_modifier(interaction.user)
 
         roll = random.randint(1, 20)
         total = roll + modifier
@@ -272,6 +277,22 @@ class Initiative(commands.Cog):
                 return
 
         state["current_index"] = 0
+
+    def _get_saved_initiative_modifier(self, user: discord.User) -> int:
+        """Load the user's saved Character and return their initiative modifier."""
+        try:
+            with open("charactersPickle", "rb") as fin:
+                try:
+                    char_list = pickle.load(fin)
+                except EOFError:
+                    char_list = {}
+        except FileNotFoundError:
+            return 0
+
+        character = char_list.get(user.name)
+        if isinstance(character, Character):
+            return character.initiative()
+        return 0
 
     def _format_modifier(self, modifier: int):
         """Format the initiative modifier for display in the roll initiative command."""
