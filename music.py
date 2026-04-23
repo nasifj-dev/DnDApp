@@ -51,7 +51,7 @@ class Music(commands.Cog):
         vc = interaction.guild.voice_client
         if vc:
             await vc.disconnect()
-            await interaction.response.send_message("Disconnected from voice channel.", ephemeral=True)
+            await interaction.response.send_message("Disconnected from voice channel.")
         else:
             await interaction.response.send_message(
                 "I am not in a voice channel.",
