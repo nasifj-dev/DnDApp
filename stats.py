@@ -6,7 +6,7 @@ from pypdf import PdfReader
 import pickle
 from typing import Literal
 
-class Stats(commands.Cog):
+class Statistics(commands.Cog):
     """A collection of commands for handling character statistics."""
 
     def __init__(self, bot):
@@ -28,16 +28,14 @@ class Stats(commands.Cog):
                 pages.append(extract)
             first, second, last = pages[0], pages[1], pages[-1]
             char = pdftosheet(first, second, last)
-
-            with open("charactersPickle", "rb") as fin:
+            with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
                     char_list = {}
             char_list[interaction.user.name] = char
-            with open("charactersPickle", "wb") as dbfile:
+            with open("chars.pkl", "wb") as dbfile:
                 pickle.dump(char_list, dbfile)
-
             await interaction.response.send_message(f'You have uploaded {char}')
         except Exception as e:
             await interaction.response.send_message(f'{e}', ephemeral=True)
@@ -74,7 +72,7 @@ class Stats(commands.Cog):
                                         'Perception', 'Performance', 'Persuasion','Religion','Sleight of Hand', 
                                         'Stealth', 'Survival']):
         """Get the skill modifier for a specified skill from the user's character sheet. The skill must be one of the standard D&D 5e skills. The character data is loaded from the pickle file based on the user's name."""
-        with open("charactersPickle", "rb") as fin:
+        with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
@@ -85,7 +83,7 @@ class Stats(commands.Cog):
     @app_commands.command(name="battlestats", description="Get all the stats you need for battle")
     async def battleStats(self, interaction: discord.Interaction):
         """Get the current HP, AC, and speed from the user's character sheet. The character data is loaded from the pickle file based on the user's name."""
-        with open("charactersPickle", "rb") as fin:
+        with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
@@ -96,7 +94,7 @@ class Stats(commands.Cog):
     @app_commands.command(name="damage", description="You got hurt!")
     async def damage(self, interaction: discord.Interaction, hitpoints: int):
         """Apply damage to the user's character and update the character sheet. The character data is loaded from the pickle file based on the user's name, modified with the damage, and then saved back to the pickle file."""
-        with open("charactersPickle", "rb") as fin:
+        with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
@@ -106,13 +104,13 @@ class Stats(commands.Cog):
         await interaction.response.send_message(f"{your_ch.damage(hitpoints)}")
 
         char_list[interaction.user.name] = your_ch
-        with open("charactersPickle", "wb") as dbfile:
+        with open("chars.pkl", "wb") as dbfile:
                 pickle.dump(char_list, dbfile)
 
     @app_commands.command(name="heal", description="Recover some health")
     async def heal(self, interaction: discord.Interaction, hitpoints: int):
         """Heal the user's character and update the character sheet. The character data is loaded from the pickle file based on the user's name, modified with the healing, and then saved back to the pickle file."""
-        with open("charactersPickle", "rb") as fin:
+        with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
@@ -122,13 +120,13 @@ class Stats(commands.Cog):
         await interaction.response.send_message(f"{your_ch.heal(hitpoints)}")
 
         char_list[interaction.user.name] = your_ch
-        with open("charactersPickle", "wb") as dbfile:
+        with open("chars.pkl", "wb") as dbfile:
                 pickle.dump(char_list, dbfile)
 
     @app_commands.command(name="inventory", description="Check your inventory")
     async def inventory(self, interaction: discord.Interaction):
         """Get the inventory list from the user's character sheet. The character data is loaded from the pickle file based on the user's name."""
-        with open("charactersPickle", "rb") as fin:
+        with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
@@ -140,7 +138,7 @@ class Stats(commands.Cog):
     @app_commands.command(name="spells", description="Check your spells")
     async def spells(self, interaction: discord.Interaction):
         """Get the spell list from the user's character sheet. The character data is loaded from the pickle file based on the user's name."""
-        with open("charactersPickle", "rb") as fin:
+        with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
@@ -151,4 +149,4 @@ class Stats(commands.Cog):
 
 
 async def setup(bot):
-    await bot.add_cog(Stats(bot))
+    await bot.add_cog(Statistics(bot))

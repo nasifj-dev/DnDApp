@@ -45,7 +45,7 @@ async def on_reaction_add(reaction, user):
             ability = reaction.message.embeds[0].title.split(" ")[0]
             await reaction.message.channel.send(f"Rolling {ability} Check...")
             
-            with open("charactersPickle", "rb") as fin:
+            with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
