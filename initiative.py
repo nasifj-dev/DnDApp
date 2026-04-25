@@ -281,7 +281,7 @@ class Initiative(commands.Cog):
     def _get_saved_initiative_modifier(self, user: discord.User) -> int:
         """Load the user's saved Character and return their initiative modifier."""
         try:
-            with open("charactersPickle", "rb") as fin:
+            with open("chars.pkl", "rb") as fin:
                 try:
                     char_list = pickle.load(fin)
                 except EOFError:
